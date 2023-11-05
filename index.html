@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+	<h1>CONVERTER</h1>
+</header>
+
+<div id="form">
+
+<div class="fish" id="fish"></div>
+<div class="fish" id="fish2"></div>
+
+<form id="waterform" method="post">
+
+<div class="formgroup" id="name-form">
+    <label for="name">Image File:</label>
+  <input type="file" id="myFile" name="filename">
+</div>
+
+<div class="formgroup" id="message-form">
+    <label for="message">Your Text: </label>
+    <textarea id="message" name="message"></textarea>
+</div>
+</form>
+</div>
+<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+
+<script>
+
+    var myFile = document.getElementById('myFile');
+    myFile.addEventListener('change', recognizeText);
+
+    async function recognizeText({ target: { files }  }) {
+        Tesseract.recognize(files[0]).then(function(result) {
+            console.log("recognizeText: result.text:", result.text);
+            document.getElementById("message").value = result.text;
+        });
+    }
+
+</script>
+</body>
+</html>
